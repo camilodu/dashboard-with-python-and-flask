@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}{% endblock %} - Lab</title>
+
+        {% assets 'home_css' %}
+            <link rel="stylesheet" href="{{ ASSET_URL }}">
+        {% endassets %}
+
+    </head>
+    <body>
+        <nav class="navbar navbar-default navbar-fixed-top main-nav">
+            <div class="container-fluid">
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li><a href="#">Coppel Viewer</a></li>
+                        <!--<li><a href="#" class="saveLayout">Save Layout</a></li>
+                        <li><a href="#" class="defaultLayout">Revert to Default Layout</a></li>-->
+                    </ul>
+                    <form method="post" class="navbar-form navbar-left">
+                        <div class="form-group">
+                            {{ form.hidden_tag() }}
+                            {{ form.cvmAddress(class="form-control",placeholder="Cluster/CVM IP") }}
+                            {{ form.username(class="form-control",placeholder="Cluster Username") }}
+                            {{ form.password(class="form-control",placeholder="Cluster Password") }}
+                            {{ form.submit(class="btn btn-primary") }}
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </nav>
+        <section class="content">
+            {% for message in get_flashed_messages() %}
+                <div class="flash">{{ message }}</div>
+            {% endfor %}
+            {% block content %}{% endblock %}
+        </section>
+
+        <div style="height: 70px; clear: both;"></div>
+
+        {% assets 'home_js' %}
+            <script src="{{ ASSET_URL }}"></script>
+        {% endassets %}
+
+    </body>
+
+</html>
